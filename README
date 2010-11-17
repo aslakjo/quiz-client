@@ -1,0 +1,11 @@
+
+Startup
+
+sbt
+ -> kjør
+    update
+    package
+    exit
+
+fra kommandolinje
+ ->      scala -cp "target/scala_2.8.0/client_2.8.0-1.0.jar:lib/*:lib_managed/scala_2.8.0/compile/*" main.scala.QuizLag HostName LagEn

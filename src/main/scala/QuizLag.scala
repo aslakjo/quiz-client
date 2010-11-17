@@ -7,9 +7,9 @@ import se.scalablesolutions.akka.actor.Actor
 import no.bekk.scala.messages._
 import no.bekk.scala.Team
 
-class QuizLag(val host:String)
+class QuizLag(val host:String, val navn: String)
 {
-  val team = new Team("Aslak!")
+  val team = new Team(navn)
   val remote = RemoteClient.actorFor("Server", host, 9999)
 
   val question = (remote !! MoreChallenges(team)) match
@@ -24,7 +24,7 @@ class QuizLag(val host:String)
 object QuizLag  
 {
   def main(args: Array[String]): Unit = {
-    new QuizLag(args(0))
+    new QuizLag(args(0), args(1))
   }
 
 }
