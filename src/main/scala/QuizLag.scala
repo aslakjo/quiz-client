@@ -12,13 +12,17 @@ class QuizLag(val host:String, val navn: String)
   val team = new Team(navn)
   val remote = RemoteClient.actorFor("Server", host, 9999)
 
-  val question = (remote !! MoreChallenges(team)) match
-  {
-    case Some(q:Question) => q
-    case None => println("fail"); null
+  (1 until 40).foreach(_=>{
+    (remote !! MoreChallenges(team)) match
+    {
+      case Some(question:Question) => answer(question)
+      case None => println("Ingen melding"); null
+    }
+  })
+
+  def answer(question:Question):Answer ={
+    new Answer(team, question, "pong")  
   }
-  
-  (1 until 20).foreach( _ =>  println(remote !! new Answer(team, question, "pong")))
 }
 
 object QuizLag  
