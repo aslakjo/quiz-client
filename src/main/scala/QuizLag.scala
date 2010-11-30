@@ -15,13 +15,18 @@ class QuizLag(val host:String, val navn: String)
   (1 until 40).foreach(_=>{
     (remote !! MoreChallenges(team)) match
     {
-      case Some(question:Question) => answer(question)
+      case Some(question:Question) => println(remote !! answer(question))
       case None => println("Ingen melding"); null
     }
   })
 
   def answer(question:Question):Answer ={
-    new Answer(team, question, "pong")  
+    question match{
+      case q@Question(_,3) => new Answer(team, q, 4)
+      case q:Question => new Answer(team, q, "pong")
+    }
+
+
   }
 }
 
